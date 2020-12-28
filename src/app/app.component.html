@@ -1,3 +1,9 @@
 <button (click)="addItem()">
   Add item
 </button>
+
+<ul>
+  <li *ngFor="let user of users$ | async">
+    Name: {{user.name}}
+  </li>
+</ul>

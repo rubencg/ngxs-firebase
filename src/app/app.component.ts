@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { BudgetStoreAction } from './state/budget-store.actions';
+import { BudgetStoreState } from './state/budget-store.state';
+import { User } from './user';
+import { UsersService } from './users.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +13,13 @@ import { BudgetStoreAction } from './state/budget-store.actions';
 })
 export class AppComponent {
   title = 'ngxs-firebase';
+  // users$: Observable<User[]>;
+  @Select(BudgetStoreState.getUsers) users$: Observable<User[]>;
 
-  constructor(private store: Store){
-    
+  constructor(private store: Store, private userService: UsersService){
+    this.store.dispatch(new BudgetStoreAction());
   }
 
   addItem() {
-    this.store.dispatch(new BudgetStoreAction("New item " + new Date()));
   }
 }
