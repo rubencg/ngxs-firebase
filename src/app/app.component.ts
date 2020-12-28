@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { BudgetStoreAction } from './state/budget-store.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngxs-firebase';
+
+  constructor(private store: Store){
+    
+  }
+
+  addItem() {
+    this.store.dispatch(new BudgetStoreAction("New item " + new Date()));
+  }
 }
